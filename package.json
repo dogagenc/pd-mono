@@ -1,0 +1,20 @@
+{
+  "name": "pd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "install:client": "cd client && yarn",
+    "install:server": "cd server && yarn",
+    "setup": "yarn install:client && yarn install:server",
+    "build:client": "cd client && yarn build",
+    "build:server": "cd server && yarn build && docker-compose build",
+    "build": "yarn build:client && yarn build:server",
+    "compose": "cd server && docker-compose up -d",
+    "server:client": "cd client && simple-spa-server dist -p 3000",
+    "start": "yarn setup && yarn build && yarn compose && yarn server:client"
+  },
+  "dependencies": {
+    "@grapes-agency/simple-spa-server": "^1.1.5"
+  }
+}

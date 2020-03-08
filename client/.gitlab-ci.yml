@@ -1,0 +1,21 @@
+image: boiyaa/google-cloud-sdk-nodejs:latest
+
+stages:
+  - deploy
+
+variables:
+  TMP_KEY_PATH: /tmp/$CI_PIPELINE_ID.json
+
+deploy_production:
+  stage: deploy
+  only:
+    - production
+  before_script:
+    - npm install
+    - npm run build
+  script:
+    - echo $SERVICE_ACCOUNT > $TMP_KEY_PATH
+    - gcloud auth activate-service-account --key-file $TMP_KEY_PATH
+    - gsutil rsync -R dist gs://$BUCKET_NAME
+  after_script:
+    - rm $TMP_KEY_PATH
