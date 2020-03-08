@@ -12,7 +12,9 @@
     "build": "yarn build:client && yarn build:server",
     "compose": "cd server && docker-compose up -d",
     "server:client": "cd client && simple-spa-server dist -p 3000",
-    "start": "yarn setup && yarn build && yarn compose && yarn server:client"
+    "start": "yarn setup && yarn build && yarn compose && yarn server:client",
+    "db:dump": "cd server && docker-compose exec -T mongo mongodump --archive --gzip --db product-database > dump.gz",
+    "db:restore": "cd server && docker-compose exec -T mongo mongorestore --archive --gzip product-database < dump.gz"
   },
   "dependencies": {
     "@grapes-agency/simple-spa-server": "^1.1.5"
