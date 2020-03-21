@@ -131,7 +131,7 @@ export default class CalculationService {
           continue;
         }
 
-        const marketPrices = marketPrice.value.split(',').map(Number);
+        const marketPrices = `${marketPrice.value}`.split(',').map(Number);
 
         let filteredMarketPrices = marketPrices.filter(
           price =>
@@ -267,6 +267,14 @@ export default class CalculationService {
     };
 
     for (const market of markets) {
+      if (!productCategory) {
+        setErrorResult(
+          market,
+          `${this.product.category} kategorisine ait global kategori bulunamadı!`
+        );
+        continue;
+      }
+
       const category = productCategory.marketMappings.find(
         m => m.marketId == market._id
       );

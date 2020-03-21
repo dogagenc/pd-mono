@@ -21,7 +21,7 @@ import * as cors from 'cors';
   mongoose: {
     url:
       process.env.mongoose_url ||
-      'mongodb://127.0.0.1:27017/example-mongoose-test'
+      'mongodb://127.0.0.1:27017/product-database'
   },
   swagger: {
     path: '/api-docs'

@@ -361,7 +361,7 @@ export default class XmlParserService {
 
         const price = {
           source: 'Trendyol',
-          value: mapValue('TrendyolFiyat', Number)
+          value: mapValue('TrendyolFiyat')
         };
 
         const existingProduct = await this.productService.findOne({

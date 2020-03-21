@@ -15,10 +15,12 @@
     "server:client": "simple-spa-server client/dist -p 3000",
     "restart": "yarn compose:up && yarn server:client",
     "start": "yarn setup && yarn build && yarn compose:up && yarn server:client",
+    "stop": "yarn compose:down",
     "db:dump": "cd server && docker-compose exec -T mongo mongodump --archive --gzip --db product-database > dump.gz",
     "db:restore": "cd server && docker-compose exec -T mongo mongorestore --archive --gzip product-database < dump.gz",
     "dev:server": "cd server && docker-compose down && docker start mongo && yarn start",
     "dev:client": "cd client && yarn serve",
+    "dev:restore": "docker exec -i mongo sh -c 'mongorestore --archive --gzip' < dump.gz",
     "dev": "concurrently 'yarn dev:server' 'yarn dev:client'"
   },
   "dependencies": {

@@ -98,8 +98,15 @@ export default class Product {
   calculationKey: string;
 
   @PreHook('update')
+  @PreHook('save')
   static preUpdate(query: any, next: any): void {
-    const product: Product = query.getUpdate();
+    let product: Product;
+    if (query.op && query.op === 'update') {
+      product = query.getUpdate();
+    } else {
+      product = query;
+    }
+
     const calc = new CalculationService(product);
 
     calc.check(next);

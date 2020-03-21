@@ -93,18 +93,21 @@ export default class ProductService {
     Promise.resolve(this.status);
 
     while (!finished) {
-      const res = await this.Product.updateMany(
-        { calculationKey: { $ne: calculationKey } },
-        { $set: { calculationKey } }
-      )
+      const products = await this.Product.find({
+        calculationKey: { $ne: calculationKey }
+      })
         .limit(limit)
         .exec();
 
-      if (!res.nModified) {
+      if (!products.length) {
         finished = true;
         this.status.active = false;
-      } else {
-        this.status.finished += res.nModified;
+      }
+
+      for (const product of products) {
+        product.calculationKey = calculationKey;
+        await product.save();
+        this.status.finished++;
       }
     }
   }
