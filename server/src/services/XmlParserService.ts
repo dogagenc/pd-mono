@@ -278,7 +278,7 @@ export default class XmlParserService {
 
         if (existingProduct) {
           existingProduct.supplierInfos = uniqBy(
-            [...(existingProduct.supplierInfos || []), supplierInfo],
+            [supplierInfo, ...(existingProduct.supplierInfos || [])],
             'supplierPublicId'
           );
           await this.productService.save(existingProduct);
@@ -319,11 +319,11 @@ export default class XmlParserService {
 
       if (existingProduct) {
         existingProduct.marketUrls = uniqBy(
-          [...(existingProduct.marketUrls || []), marketUrl],
+          [marketUrl, ...(existingProduct.marketUrls || [])],
           'name'
         );
         existingProduct.prices = uniqBy(
-          [...(existingProduct.prices || []), price],
+          [price, ...(existingProduct.prices || [])],
           'source'
         );
         await this.productService.save(existingProduct);
@@ -370,11 +370,11 @@ export default class XmlParserService {
 
         if (existingProduct) {
           existingProduct.marketUrls = uniqBy(
-            [...(existingProduct.marketUrls || []), marketUrl],
+            [marketUrl, ...(existingProduct.marketUrls || [])],
             'name'
           );
           existingProduct.prices = uniqBy(
-            [...(existingProduct.prices || []), price],
+            [price, ...(existingProduct.prices || [])],
             'source'
           );
           await this.productService.save(existingProduct);
@@ -455,19 +455,19 @@ export default class XmlParserService {
 
         updatedProduct.enabledPlatformIds = uniqBy(
           [
-            ...(existingProduct.enabledPlatformIds || []),
-            ...enabledPlatformIds
+            ...enabledPlatformIds,
+            ...(existingProduct.enabledPlatformIds || [])
           ],
           'value'
         );
 
         updatedProduct.enabledMarketIds = uniqBy(
-          [...(existingProduct.enabledMarketIds || []), ...enabledMarketIds],
+          [...enabledMarketIds, ...(existingProduct.enabledMarketIds || [])],
           'value'
         );
 
         updatedProduct.marketUrls = uniqBy(
-          [...(existingProduct.marketUrls || []), ...marketUrls],
+          [...marketUrls, ...(existingProduct.marketUrls || [])],
           'name'
         );
 
