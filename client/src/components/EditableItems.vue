@@ -573,7 +573,8 @@ export default class EditableItems extends Vue {
     }
 
     try {
-      await this.service.post(item);
+      const method = this.isEdit ? 'put' : 'post';
+      await this.service[method].call(this.service, item);
       this.getItems();
       this.showDialog = false;
     } catch (error) {

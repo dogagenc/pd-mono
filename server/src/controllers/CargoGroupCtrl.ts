@@ -6,7 +6,8 @@ import {
   Delete,
   PathParams,
   Status,
-  Required
+  Required,
+  Put
 } from '@tsed/common';
 import CargoGroup from '../models/CargoGroup';
 import CargoGroupService from '../services/CargoGroupService';
@@ -20,6 +21,7 @@ export default class CargoGroupCtrl {
     return this.service.query();
   }
 
+  @Put('/')
   @Post('/')
   async post(@BodyParams() cargoGroup: CargoGroup): Promise<CargoGroup> {
     return this.service.save(cargoGroup);

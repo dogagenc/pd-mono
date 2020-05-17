@@ -7,7 +7,8 @@ import {
   PathParams,
   Status,
   Required,
-  QueryParams
+  QueryParams,
+  Put
 } from '@tsed/common';
 import ProductService from '../services/ProductService';
 import Product from '../models/Product';
@@ -30,6 +31,7 @@ export default class ProductCtrl {
     return this.service.findOne({ sku });
   }
 
+  @Put('/')
   @Post('/')
   async post(@BodyParams() product: Product): Promise<Product> {
     return this.service.save(product);

@@ -6,7 +6,8 @@ import {
   Delete,
   PathParams,
   Status,
-  Required
+  Required,
+  Put
 } from '@tsed/common';
 import MarketService from '../services/MarketService';
 import Market from '../models/Market';
@@ -20,6 +21,7 @@ export default class MarketCtrl {
     return this.service.query();
   }
 
+  @Put('/')
   @Post('/')
   async post(@BodyParams() market: Market): Promise<Market> {
     return this.service.save(market);

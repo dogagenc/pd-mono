@@ -6,7 +6,8 @@ import {
   Delete,
   PathParams,
   Status,
-  Required
+  Required,
+  Put
 } from '@tsed/common';
 import PlatformService from '../services/PlatformService';
 import Platform from '../models/Platform';
@@ -20,6 +21,7 @@ export default class PlatformCtrl {
     return this.service.query();
   }
 
+  @Put('/')
   @Post('/')
   async post(@BodyParams() platform: Platform): Promise<Platform> {
     return this.service.save(platform);

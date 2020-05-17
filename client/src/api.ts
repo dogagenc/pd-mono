@@ -124,6 +124,10 @@ export class ApiService<T> {
     return this.wrapper<T>(api.post(this.base, payload));
   }
 
+  async put(payload: Partial<T>) {
+    return this.wrapper<T>(api.put(this.base, payload));
+  }
+
   async delete(id: string) {
     return api.delete(`${this.base}/${id}`);
   }
