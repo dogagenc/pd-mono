@@ -72,7 +72,7 @@
             {{ item[prop] }}
           </a>
           <span v-else>
-            {{ item[prop] }}
+            {{ getItemProp(item, prop) }}
           </span>
         </md-table-cell>
       </md-table-row>
@@ -322,6 +322,16 @@ export default class EditableItems extends Vue {
       total: totalPages,
       totalDocs
     };
+  }
+
+  getItemProp(item: any, prop: string) {
+    if (this.isGroupedProp(prop)) {
+      const propArray = item[prop];
+
+      return propArray.map((a: any) => Object.values(a).join(':')).join(', ');
+    }
+
+    return item[prop];
   }
 
   getItemIndex(item: Models) {

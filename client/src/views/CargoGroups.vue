@@ -20,7 +20,7 @@ export default class CargoGroups extends Vue {
       cargoCompanies: ['Kargo Firmaları'],
       suppliers: ['Tedarikçiler']
     },
-    displayProps: ['name'],
+    displayProps: ['name', 'cargoCompanies'],
     groupedProps: {
       cargoCompanies: {
         name: ['Firma İsmi'],

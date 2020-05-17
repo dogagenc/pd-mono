@@ -50,8 +50,8 @@ export default class CalculationService {
       )
     );
 
-    const maxIdx = infoReses.indexOf(Math.max(...infoReses));
-    const supplierPublicId = this.product.supplierInfos[maxIdx]
+    const minIdx = infoReses.indexOf(Math.min(...infoReses));
+    const supplierPublicId = this.product.supplierInfos[minIdx]
       .supplierPublicId;
 
     const supplier = await this.supplierService.findOne({
@@ -61,7 +61,7 @@ export default class CalculationService {
     const result = {
       type: 'keys',
       minSupplier: supplier.name,
-      minPrice: exactMath.ceil(infoReses[maxIdx], -2)
+      minPrice: exactMath.ceil(infoReses[minIdx], -2)
     };
 
     this.saveOrUpdateCalculation(result, 'tedarikci');
